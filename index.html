@@ -1,14 +1,19 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy er Happy engagement..</title>
+    <!-- iOS & Android er jonno perfect mobile scale, anti-auto-zoom -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Happy's Engagement Party 💍</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
+        html {
+            scroll-behavior: smooth;
+            -webkit-tap-highlight-color: transparent; /* Mobile e tap korle nil box asbe na */
+        }
+        
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
@@ -19,7 +24,7 @@
             background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1e3c72);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
-            overflow-x: hidden;
+            overflow-x: hidden; /* Side e jeno scroll na hoy */
         }
         
         @keyframes gradientBG {
@@ -29,10 +34,9 @@
         }
 
         /* Custom scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
-        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.5); }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 10px; }
 
         .glass-panel {
             background: rgba(15, 23, 42, 0.4);
@@ -42,16 +46,13 @@
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .glass-panel:hover {
-            border-color: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
-        }
 
         .modern-input {
             background: rgba(255, 255, 255, 0.05);
             border: 2px solid rgba(255, 255, 255, 0.1);
             color: #fff;
             transition: all 0.3s ease;
+            box-sizing: border-box; /* Width fix */
         }
         
         .modern-input::placeholder { color: rgba(255, 255, 255, 0.4); }
@@ -91,21 +92,29 @@
             from { box-shadow: 0 0 10px rgba(251, 191, 36, 0.2); }
             to { box-shadow: 0 0 25px rgba(251, 191, 36, 0.6); }
         }
+
+        /* Number input spinner hide korar jonno */
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+        input[type=number] { -moz-appearance: textfield; }
     </style>
 </head>
-<body class="flex items-center justify-center p-4 sm:p-8 relative min-h-screen">
+<!-- min-h-screen ar items-start deya hoyeche jate mobile e uporer dike kete na jay -->
+<body class="flex flex-col items-center justify-start min-h-screen py-10 px-4 relative overflow-x-hidden">
 
-    <div class="absolute top-10 left-10 w-32 h-32 bg-white/10 rounded-full blur-2xl animate-pulse"></div>
-    <div class="absolute bottom-10 right-10 w-48 h-48 bg-yellow-400/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+    <!-- Background glowing orbs -->
+    <div class="fixed top-10 left-10 w-32 h-32 bg-white/10 rounded-full blur-2xl animate-pulse pointer-events-none"></div>
+    <div class="fixed bottom-10 right-10 w-48 h-48 bg-yellow-400/10 rounded-full blur-3xl animate-pulse pointer-events-none" style="animation-delay: 1s;"></div>
 
-    <div class="glass-panel w-full max-w-lg rounded-3xl p-8 sm:p-10 relative z-10 fade-in-up">
+    <!-- my-auto ensures center alignment if screen is tall enough, w-full ensures it fits perfectly -->
+    <div class="glass-panel w-full max-w-md md:max-w-lg my-auto rounded-3xl p-6 sm:p-10 relative z-10 fade-in-up">
         
         <div class="text-center mb-8">
             <span class="inline-block py-1.5 px-4 rounded-full bg-yellow-500/20 text-yellow-300 text-xs font-bold tracking-widest uppercase mb-4 border border-yellow-500/30">
                 Cheers! 🍻
             </span>
-            <h1 class="text-4xl font-extrabold text-white mb-3 tracking-tight drop-shadow-lg">Happy er Happy engagement.. 💍</h1>
-            <p class="text-gray-300 font-medium text-sm leading-relaxed">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-white mb-3 tracking-tight drop-shadow-lg">Happy's Engagement.. 💍</h1>
+            <p class="text-gray-300 font-medium text-sm leading-relaxed px-2">
                 Party te eshechis khub bhalo kotha, kintu daru er daam ta nije diye ja bhai. Happy khorcha korbe na! 🤪
             </p>
         </div>
@@ -115,37 +124,37 @@
             <div class="group">
                 <label for="customerName" class="block text-gray-300 text-sm font-semibold mb-2 transition-colors group-focus-within:text-yellow-400">Tor nam ki bhai? (Name)</label>
                 <input type="text" id="customerName" required placeholder="Jemon: Aritrick Bhowmick"
-                    class="modern-input w-full px-5 py-3.5 rounded-xl text-base w-full">
+                    class="modern-input w-full px-4 py-3 rounded-xl text-base">
             </div>
 
             <div class="group">
-                <label for="customerEmail" class="block text-gray-300 text-sm font-semibold mb-2 transition-colors group-focus-within:text-yellow-400">Tor Email ID de (Bill jabe ekhane)</label>
+                <label for="customerEmail" class="block text-gray-300 text-sm font-semibold mb-2 transition-colors group-focus-within:text-yellow-400">Tor Email ID de (Email)</label>
                 <input type="email" id="customerEmail" required placeholder="email@example.com" 
                     pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
                     title="Bhai thik kore email de, vulval nile hobe na!"
-                    class="modern-input w-full px-5 py-3.5 rounded-xl text-base w-full">
+                    class="modern-input w-full px-4 py-3 rounded-xl text-base">
             </div>
 
             <div class="group">
                 <label for="beerSelection" class="block text-gray-300 text-sm font-semibold mb-2 transition-colors group-focus-within:text-yellow-400">Ki khabi bol? (Select Brew)</label>
                 <div class="relative">
                     <select id="beerSelection" required
-                        class="modern-input w-full px-5 py-3.5 appearance-none rounded-xl text-base cursor-pointer">
-                        <option value="" disabled selected>Ekta valo brand bacch (Choose a drink)...</option>
+                        class="modern-input w-full px-4 py-3 appearance-none rounded-xl text-base cursor-pointer">
+                        <option value="" disabled selected>Ekta valo brand bacch...</option>
                         <!-- Options populated by JS -->
                     </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-5 text-gray-400">
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-400">
                         <svg class="h-5 w-5 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                     </div>
                 </div>
                 
-                <div id="beerPreview" class="hidden mt-4 overflow-hidden rounded-xl bg-white/5 border border-white/10 shadow-inner backdrop-blur-sm transition-all duration-300">
+                <div id="beerPreview" class="hidden mt-4 overflow-hidden rounded-xl bg-white/5 border border-white/10 shadow-inner backdrop-blur-sm transition-all duration-300 transform scale-95 opacity-0">
                     <div class="flex items-center p-4">
-                        <div class="h-16 w-16 bg-white/10 rounded-xl flex items-center justify-center p-2 mr-4 border border-white/5">
+                        <div class="h-16 w-16 bg-white/10 rounded-xl flex items-center justify-center p-2 mr-4 border border-white/5 flex-shrink-0">
                             <img id="beerImage" src="" alt="Beer" class="max-h-full max-w-full object-contain filter drop-shadow-md">
                         </div>
                         <div>
-                            <p id="beerNameDisplay" class="font-bold text-white text-lg leading-tight"></p>
+                            <p id="beerNameDisplay" class="font-bold text-white text-base sm:text-lg leading-tight"></p>
                             <p id="beerPriceDisplay" class="text-sm font-semibold text-yellow-400 mt-1"></p>
                         </div>
                     </div>
@@ -154,82 +163,75 @@
 
             <div class="group">
                 <label for="quantity" class="block text-gray-300 text-sm font-semibold mb-2 transition-colors group-focus-within:text-yellow-400">Kota bottle lagbe? (Quantity)</label>
-                <div class="flex items-center space-x-4">
-                    <button type="button" id="btnMinus" class="bg-white/10 hover:bg-white/20 text-white h-12 w-12 rounded-xl flex items-center justify-center font-bold text-2xl transition-all focus:ring-2 focus:ring-yellow-400 border border-white/10 active:scale-95">-</button>
+                <div class="flex items-center space-x-3">
+                    <button type="button" id="btnMinus" class="bg-white/10 hover:bg-white/20 text-white h-12 w-12 rounded-xl flex items-center justify-center font-bold text-2xl transition-all active:scale-95 border border-white/10">-</button>
                     <input type="number" id="quantity" required min="1" max="20" value="1"
-                        class="modern-input w-24 h-12 px-2 text-center rounded-xl text-xl font-bold no-spinners">
-                    <button type="button" id="btnPlus" class="bg-yellow-500/20 hover:bg-yellow-500/40 text-yellow-400 h-12 w-12 rounded-xl flex items-center justify-center font-bold text-2xl transition-all focus:ring-2 focus:ring-yellow-400 border border-yellow-500/30 active:scale-95">+</button>
+                        class="modern-input w-20 h-12 px-2 text-center rounded-xl text-xl font-bold">
+                    <button type="button" id="btnPlus" class="bg-yellow-500/20 hover:bg-yellow-500/40 text-yellow-400 h-12 w-12 rounded-xl flex items-center justify-center font-bold text-2xl transition-all active:scale-95 border border-yellow-500/30">+</button>
                 </div>
                 <p class="text-xs text-gray-400 mt-2 italic">Eka khas na kintu, sobai ke dis! (Don't drink alone!)</p>
-                <style>
-                    input[type=number]::-webkit-inner-spin-button, 
-                    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-                    input[type=number] { -moz-appearance: textfield; }
-                </style>
             </div>
 
             <div class="group">
                 <label for="requirements" class="block text-gray-300 text-sm font-semibold mb-2 transition-colors group-focus-within:text-yellow-400">Aro kono nakhra ache? (Special Requests)</label>
                 <textarea id="requirements" rows="2" placeholder="Borof, chakhna, plastic glass... likhe de"
-                    class="modern-input w-full px-5 py-3.5 rounded-xl text-base resize-none"></textarea>
+                    class="modern-input w-full px-4 py-3 rounded-xl text-base resize-none"></textarea>
             </div>
 
             <button type="submit" id="submitBtn"
-                class="btn-animate w-full py-4 mt-8 bg-gradient-to-r from-yellow-400 via-yellow-500 to-orange-500 text-gray-900 font-extrabold text-lg rounded-xl shadow-[0_0_20px_rgba(245,158,11,0.4)] border border-yellow-300 focus:outline-none focus:ring-4 focus:ring-yellow-500/50 uppercase tracking-wide disabled:opacity-75 disabled:cursor-not-allowed">
+                class="btn-animate w-full py-4 mt-6 bg-gradient-to-r from-yellow-400 via-yellow-500 to-orange-500 text-gray-900 font-extrabold text-lg rounded-xl shadow-[0_0_20px_rgba(245,158,11,0.4)] border border-yellow-300 focus:outline-none uppercase tracking-wide">
                 Order Confirm Kor & Taka De (<span id="totalAmountBtn">₹0</span>)
             </button>
-
-            <!-- Status message box for errors or activation warnings -->
-            <div id="statusMessage" class="hidden mt-4 p-4 rounded-xl text-center text-sm font-semibold transition-all duration-300"></div>
 
         </form>
     </div>
 
-    <div id="qrModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-xl flex items-center justify-center p-4 opacity-0 transition-all duration-300">
-        <div class="glass-panel rounded-3xl p-8 max-w-sm w-full shadow-2xl transform scale-95 transition-all duration-400 cubic-bezier(0.34, 1.56, 0.64, 1) border-gray-700" id="qrModalContent">
+    <!-- QR & WhatsApp Modal -->
+    <div id="qrModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-xl flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+        <div class="glass-panel rounded-3xl p-6 sm:p-8 max-w-sm w-full shadow-2xl transform scale-95 transition-all duration-400 border border-gray-700 max-h-[95vh] overflow-y-auto" id="qrModalContent">
             
-            <div class="text-center mb-6">
-                <div class="w-16 h-16 bg-green-500/20 text-green-400 rounded-full flex items-center justify-center mx-auto mb-4 border border-green-500/30">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            <div class="text-center mb-5">
+                <div class="w-14 h-14 bg-green-500/20 text-green-400 rounded-full flex items-center justify-center mx-auto mb-3 border border-green-500/30">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                 </div>
                 <h2 class="text-2xl font-bold text-white mb-1">Taka ta ebar patha! 💸</h2>
-                <p class="text-gray-400 text-sm">Order kora hoye geche, ebar pecha!</p>
+                <p class="text-gray-400 text-xs sm:text-sm">Order confirm hoye geche, ebar pecha!</p>
             </div>
 
-            <div class="bg-white/5 rounded-2xl p-5 mb-6 text-sm border border-white/10 backdrop-blur-sm">
-                <div class="flex justify-between mb-3 text-gray-300">
+            <div class="bg-white/5 rounded-2xl p-4 mb-5 text-sm border border-white/10 backdrop-blur-sm">
+                <div class="flex justify-between mb-2 text-gray-300">
                     <span>Naam:</span>
                     <span id="summaryName" class="text-white font-semibold"></span>
                 </div>
-                <div class="flex justify-between mb-3 text-gray-300">
+                <div class="flex justify-between mb-2 text-gray-300">
                     <span>Mal:</span>
-                    <span id="summaryOrder" class="text-white font-semibold text-right max-w-[60%]"></span>
+                    <span id="summaryOrder" class="text-white font-semibold text-right max-w-[60%] line-clamp-2"></span>
                 </div>
-                <div class="flex justify-between border-t border-white/10 pt-3 mt-1">
+                <div class="flex justify-between border-t border-white/10 pt-2 mt-2">
                     <span class="text-yellow-400 font-bold">Total Bill:</span>
                     <span id="summaryTotal" class="text-yellow-400 font-black text-lg"></span>
                 </div>
             </div>
 
-            <a href="#" id="upiIntentLink" class="block p-4 bg-white rounded-2xl mb-6 mx-auto relative group qr-glow transition-all hover:scale-105 active:scale-95 cursor-pointer text-center">
+            <!-- Custom UPI Link using Intent -->
+            <a href="#" id="upiIntentLink" class="block p-3 sm:p-4 bg-white rounded-2xl mb-5 mx-auto relative group qr-glow transition-all hover:scale-105 active:scale-95 cursor-pointer text-center">
                 <p class="text-gray-800 font-bold mb-2 text-sm">Scan kor ba ekhane Tap kor!</p>
-                <!-- Using the specific QR image provided -->
                 <img id="dynamicQR" src="61079.png" alt="UPI Payment QR Code" class="w-full h-auto mx-auto rounded-lg object-cover shadow-sm">
-                <div class="mt-3 flex items-center justify-center space-x-2">
+                <div class="mt-2 flex items-center justify-center space-x-2">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/UPI-Logo-vector.svg" alt="UPI" class="h-4">
                     <p class="text-xs text-gray-600 font-medium">ari99bhowmick@oksbi</p>
                 </div>
                 <div class="absolute inset-0 bg-black/70 rounded-2xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span class="text-white font-bold px-4 py-2 bg-yellow-500 rounded-full text-sm">Phone theke direct pay kor 🚀</span>
+                    <span class="text-white font-bold px-3 py-1.5 bg-yellow-500 rounded-full text-xs sm:text-sm">Tap kore Pay kor 🚀</span>
                 </div>
             </a>
 
             <div class="space-y-3">
-                <button type="button" id="whatsappBtn" class="btn-animate w-full py-3.5 text-center bg-green-500 hover:bg-green-600 text-white font-extrabold rounded-xl transition-colors shadow-[0_0_15px_rgba(34,197,94,0.4)] focus:outline-none flex items-center justify-center space-x-2">
+                <button type="button" id="whatsappBtn" class="btn-animate w-full py-3 text-center bg-green-500 hover:bg-green-600 text-white font-extrabold rounded-xl transition-colors shadow-[0_0_15px_rgba(34,197,94,0.4)] focus:outline-none flex items-center justify-center space-x-2">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.098.824z"></path></svg>
-                    <span>WhatsApp e Order Patha!</span>
+                    <span>WhatsApp e Pathiye De!</span>
                 </button>
-                <button type="button" id="closeModalBtn" class="btn-animate w-full py-3.5 text-center bg-gray-700/50 hover:bg-gray-700 text-white font-semibold rounded-xl transition-colors border border-gray-600 focus:outline-none">
+                <button type="button" id="closeModalBtn" class="btn-animate w-full py-3 text-center bg-gray-700/50 hover:bg-gray-700 text-white font-semibold rounded-xl transition-colors border border-gray-600 focus:outline-none text-sm">
                     Pore dichi (Cancel)
                 </button>
             </div>
@@ -238,26 +240,22 @@
     </div>
 
     <script>
-        // Data for Kolkata Beer Market
+        // Kolkata Market Beer Data
         const beerData = [
-            { id: 'kf-premium', name: 'Kingfisher Premium Lager', volume: '650ML', price: 170, image: 'https://placehold.co/150x150/1e3a8a/ffffff?text=KF+Prem' },
+            { id: 'kf-premium', name: 'Kingfisher Premium', volume: '650ML', price: 170, image: 'https://placehold.co/150x150/1e3a8a/ffffff?text=KF+Prem' },
             { id: 'kf-ultra', name: 'Kingfisher Ultra', volume: '330ML', price: 150, image: 'https://placehold.co/150x150/000000/ffffff?text=KF+Ultra' },
             { id: 'kf-strong', name: 'Kingfisher Strong', volume: '650ML', price: 180, image: 'https://placehold.co/150x150/dc2626/ffffff?text=KF+Strong' },
             { id: 'tuborg-green', name: 'Tuborg Green / Mild', volume: '650ML', price: 170, image: 'https://placehold.co/150x150/166534/ffffff?text=Tuborg' },
             { id: 'budweiser', name: 'Budweiser Premium', volume: '650ML', price: 180, image: 'https://placehold.co/150x150/991b1b/ffffff?text=Budweiser' },
             { id: 'bud-magnum', name: 'Budweiser Magnum', volume: '650ML', price: 210, image: 'https://placehold.co/150x150/7f1d1d/ffffff?text=Bud+Mag' },
-            { id: 'carlsberg-smooth', name: 'Carlsberg Smooth', volume: '650ML', price: 180, image: 'https://placehold.co/150x150/14532d/ffffff?text=Carlsberg' },
-            { id: 'bira-blonde', name: 'Bira 91 Blonde Lager', volume: '330ML', price: 150, image: 'https://placehold.co/150x150/ca8a04/ffffff?text=Bira' },
-            { id: 'bira-white', name: 'Bira 91 White', volume: '330ML', price: 150, image: 'https://placehold.co/150x150/fde047/000000?text=Bira+White' },
+            { id: 'carlsberg', name: 'Carlsberg Smooth', volume: '650ML', price: 180, image: 'https://placehold.co/150x150/14532d/ffffff?text=Carlsberg' },
+            { id: 'bira-blonde', name: 'Bira 91 Blonde', volume: '330ML', price: 150, image: 'https://placehold.co/150x150/ca8a04/ffffff?text=Bira' },
             { id: 'heineken', name: 'Heineken Lager', volume: '330ML', price: 200, image: 'https://placehold.co/150x150/15803d/ffffff?text=Heineken' },
-            { id: 'corona', name: 'Corona Extra', volume: '330ML', price: 250, image: 'https://placehold.co/150x150/eab308/000000?text=Corona' },
-            { id: 'hoegaarden', name: 'Hoegaarden', volume: '330ML', price: 300, image: 'https://placehold.co/150x150/fbbf24/000000?text=Hoegaarden' }
+            { id: 'corona', name: 'Corona Extra', volume: '330ML', price: 250, image: 'https://placehold.co/150x150/eab308/000000?text=Corona' }
         ];
 
         const MERCHANT_UPI_ID = "ari99bhowmick@oksbi";
-        
-        // EKHANE APNAR WHATSAPP NUMBER DIN (91 er por):
-        const HOST_WHATSAPP = "917980679843"; 
+        const HOST_WHATSAPP = "917980679843"; // Apnar WhatsApp Number Set Kora Ache
 
         // DOM Elements
         const selectBeer = document.getElementById('beerSelection');
@@ -271,8 +269,7 @@
         const btnPlus = document.getElementById('btnPlus');
         const totalAmountBtn = document.getElementById('totalAmountBtn');
         const orderForm = document.getElementById('orderForm');
-        const submitBtn = document.getElementById('submitBtn');
-
+        
         const qrModal = document.getElementById('qrModal');
         const qrModalContent = document.getElementById('qrModalContent');
         const closeModalBtn = document.getElementById('closeModalBtn');
@@ -323,9 +320,10 @@
             if (beer) {
                 if (beerPreview.classList.contains('hidden')) {
                      beerPreview.classList.remove('hidden');
+                     // Smooth appearance transition
                      setTimeout(() => {
-                         beerPreview.classList.add('opacity-100', 'translate-y-0', 'scale-100');
-                         beerPreview.classList.remove('opacity-0', '-translate-y-4', 'scale-95');
+                         beerPreview.classList.remove('opacity-0', 'scale-95');
+                         beerPreview.classList.add('opacity-100', 'scale-100');
                      }, 10);
                 }
                 
@@ -346,12 +344,12 @@
             setTimeout(() => {
                 totalAmountBtn.textContent = `₹${total}`;
                 totalAmountBtn.style.transform = 'scale(1)';
-            }, 100);
+            }, 150);
             totalAmountBtn.style.transition = 'transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
         }
 
         function handleFormSubmit(e) {
-            e.preventDefault();
+            e.preventDefault(); // Stop page reload
 
             const name = document.getElementById('customerName').value;
             const email = document.getElementById('customerEmail').value;
@@ -364,18 +362,21 @@
 
             const total = beer.price * qty;
 
+            // Set modal data
             document.getElementById('summaryName').textContent = name;
             document.getElementById('summaryOrder').textContent = `${qty} x ${beer.name}`;
             document.getElementById('summaryTotal').textContent = `₹${total}`;
             
-            // Order data save kora hocche WhatsApp e pathanor jonno
+            // Save data for WhatsApp
             currentOrderData = { name, email, beerName: beer.name, qty, total, requirements };
             
-            const statusDiv = document.getElementById('statusMessage');
-            if (statusDiv) statusDiv.classList.add('hidden');
+            // Prepare UPI Intent link
+            const tnEncoded = encodeURIComponent(`Beer Party Order - ${name}`);
+            const pnEncoded = encodeURIComponent('Happy Engagement');
+            const upiUrl = `upi://pay?pa=${MERCHANT_UPI_ID}&pn=${pnEncoded}&am=${total}.00&cu=INR&tn=${tnEncoded}`;
+            upiIntentLink.href = upiUrl;
 
-            // Kono API chara direct QR Modal khulbe! Super fast!
-            preparePayment(name, total);
+            // Open Modal
             openModal();
         }
 
@@ -390,27 +391,20 @@
                          `*Koy Bottle:* ${currentOrderData.qty} ta\n` +
                          `*Total Bill:* ₹${currentOrderData.total}\n` +
                          `*Extra Nakhra:* ${currentOrderData.requirements || 'Kichu na'}\n\n` +
-                         `_Party kobe bhai? 🎉_`;
+                         `_Taka pathiye dichi bhai, accept kor! 🎉_`;
                          
             const waUrl = `https://wa.me/${HOST_WHATSAPP}?text=${encodeURIComponent(text)}`;
             window.open(waUrl, '_blank');
         });
 
-        function preparePayment(name, total) {
-            const tnEncoded = encodeURIComponent(`Beer Party Order for ${name}`);
-            const pnEncoded = encodeURIComponent('Happy Engagement');
-            const upiUrl = `upi://pay?pa=${MERCHANT_UPI_ID}&pn=${pnEncoded}&am=${total}.00&cu=INR&tn=${tnEncoded}`;
-            
-            upiIntentLink.href = upiUrl;
-            // QR image is static as requested (61079.png)
-        }
-
         function openModal() {
             qrModal.classList.remove('hidden');
-            void qrModal.offsetWidth;
-            qrModal.classList.remove('opacity-0');
-            qrModalContent.classList.remove('scale-95', 'translate-y-8');
-            qrModalContent.classList.add('scale-100', 'translate-y-0');
+            // Allow display:block to apply before changing opacity for animation
+            setTimeout(() => {
+                qrModal.classList.remove('opacity-0');
+                qrModalContent.classList.remove('scale-95', 'translate-y-8');
+                qrModalContent.classList.add('scale-100', 'translate-y-0');
+            }, 10);
         }
 
         function closeModal() {
@@ -423,10 +417,8 @@
             }, 300);
         }
 
+        // Initialize App
         init();
-        beerPreview.classList.add('opacity-0', '-translate-y-4', 'scale-95');
-
     </script>
 </body>
 </html>
-```
